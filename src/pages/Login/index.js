@@ -37,11 +37,9 @@ export default function Login({ navigation }) {
             
             style={styles.container}
         >
-        <View style={styles.quadrado}>
-            <View style={styles.rotapm}>
-                <Text style={styles.logtxt}>Login</Text>
-            </View>
-        </View>
+            
+            <View style={styles.rotapm}></View>
+            <Text style={styles.logtxt}>Login</Text>
             <View style={styles.forinha}>
                 <View style={styles.foracpf}>
                     <Text style={styles.text}>E-mail</Text>    
@@ -89,27 +87,18 @@ export default function Login({ navigation }) {
                 <TouchableOpacity
                     // disabled={true}
                     style={styles.buttonLogin}
-                    onPress={() => navigation.navigate("Survey")}
-                >
-                    <Text style={styles.textButtomLogin}>Login</Text>
+                    // onPress={() => navigation.navigate("Survey")}
+                    >
+                    <Text style={styles.textButtomLogin}>Acessar</Text>
                 </TouchableOpacity>
                 :
                 <TouchableOpacity
-                    style={styles.buttonLogin}
-                    onPress={() => navigation.navigate("Survey")}
+                style={styles.buttonLogin}
+                onPress={() => navigation.navigate("Survey")}
                 >
-                    <Text style={styles.textButtomLogin}>Login</Text>
+                    <Text style={styles.textButtomLogin}>Acessar</Text>
                 </TouchableOpacity>
             }
-            <Text style={styles.registration}>
-                Voce não tem cadastro?
-                <Text
-                    style={styles.linkSubscribers}
-                    onPress={() => navigation.navigate("Cadastro")}
-                >
-                    Cadastre-se
-                </Text>
-            </Text>
             <View style={{ height: 100 }} />
         </KeyboardAvoidingView>
     );
