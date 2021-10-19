@@ -59,7 +59,7 @@ function Survey(props) {
         </View>
       </View>
 
-      <View style={Styles.avancar}>
+      <TouchableOpacity style={Styles.avancar}>
         <Svg viewBox="0 0 78.44 74.26">
           <Ellipse
             stroke="rgba(230, 230, 230,1)"
@@ -72,7 +72,7 @@ function Survey(props) {
           </Ellipse>
         </Svg>
             <Icon name="ios-arrow-forward" style={Styles.seta}></Icon>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 }
