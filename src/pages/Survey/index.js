@@ -2,11 +2,19 @@ import React, { Component } from "react";
 import { View, Text } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Svg, { Ellipse } from "react-native-svg";
+import { RadioButton } from "react-native-paper";
 import Icon from "react-native-vector-icons/Ionicons";
-import CupertinoRadio from "../../../components/cupertinoRadio";
 import Styles from "./Styles";
 
 function Survey(props) {
+  const [checked, setChecked] = React.useState("first");
+  const theme = {
+    colors: {
+      primary: "#6200ee",
+      accent: "yellow",
+    },
+  };
+
   return (
     <View style={Styles.container}>
       <View style={Styles.ps_bar}>
@@ -17,46 +25,38 @@ function Survey(props) {
         <Text style={Styles.question}>
           1. Limpeza e conservação da sala de aula e da oficina
         </Text>
-
         <Text style={Styles.nivelDeImportancia}>Nivel de Importancia:</Text>
-        <View style={Styles.cupertinoRadioStackRow}>
-          <View style={Styles.cupertinoRadioStack}>
-            <CupertinoRadio style={Styles.cupertinoRadio}></CupertinoRadio>
-            <CupertinoRadio style={Styles.cupertinoRadio2}></CupertinoRadio>
-          </View>
-          <View style={Styles.altaColumn}>
-            <Text style={Styles.alta}>Alta</Text>
-            <Text style={Styles.media}>Média</Text>
-          </View>
-        </View>
-        <View style={Styles.cupertinoRadio3Row}>
-          <CupertinoRadio style={Styles.cupertinoRadio3}></CupertinoRadio>
-          <Text style={Styles.baixa}>Baixa</Text>
-        </View>
+        {/* - First Radio - */}
+        <RadioButton
+          value="first"
+          status={checked === "first" ? "checked" : "unchecked"}
+          onPress={() => setChecked("first")}
+        />
+        <Text style={Styles.alta}>Alta</Text>
+
+        {/* - Second Radio - */}
+        <RadioButton
+          value="second"
+          status={checked === "second" ? "checked" : "unchecked"}
+          onPress={() => setChecked("second")}
+        />
+        <Text style={Styles.media}>Média</Text>
+
+        {/* - Third Radio - */}
+        <RadioButton
+          value="third"
+          theme={theme.colors.primary}
+          status={checked === "third" ? "checked" : "unchecked"}
+          onPress={() => setChecked("third")}
+        />
+        <Text style={Styles.baixa}>Baixa</Text>
+
         <Text style={Styles.nivelDeSatisfacao}>Nivel de Satisfação:</Text>
-        <View style={Styles.cupertinoRadio4StackRow}>
-          <View style={Styles.cupertinoRadio4Stack}>
-            <CupertinoRadio style={Styles.cupertinoRadio4}></CupertinoRadio>
-            <CupertinoRadio style={Styles.cupertinoRadio5}></CupertinoRadio>
-          </View>
-          <Text style={Styles.otimo}>Otimo</Text>
-        </View>
-        <View style={Styles.cupertinoRadio6Row}>
-          <CupertinoRadio style={Styles.cupertinoRadio6}></CupertinoRadio>
-          <Text style={Styles.bom}>Bom</Text>
-        </View>
-        <View style={Styles.cupertinoRadio9Row}>
-          <CupertinoRadio style={Styles.cupertinoRadio9}></CupertinoRadio>
-          <Text style={Styles.naoSeAplica}>Não se aplica</Text>
-        </View>
-        <View style={Styles.cupertinoRadio7Row}>
-          <CupertinoRadio style={Styles.cupertinoRadio7}></CupertinoRadio>
-          <Text style={Styles.regular}>Regular</Text>
-        </View>
-        <View style={Styles.cupertinoRadio8Row}>
-          <CupertinoRadio style={Styles.cupertinoRadio8}></CupertinoRadio>
-          <Text style={Styles.ruim}>Ruim</Text>
-        </View>
+        <Text style={Styles.otimo}>Otimo</Text>
+        <Text style={Styles.bom}>Bom</Text>
+        <Text style={Styles.naoSeAplica}>Não se aplica</Text>
+        <Text style={Styles.regular}>Regular</Text>
+        <Text style={Styles.ruim}>Ruim</Text>
       </View>
 
       <TouchableOpacity style={Styles.avancar}>
@@ -68,10 +68,9 @@ function Survey(props) {
             cy={37}
             rx={37}
             ry={37}
-          >
-          </Ellipse>
+          ></Ellipse>
         </Svg>
-            <Icon name="ios-arrow-forward" style={Styles.seta}></Icon>
+        <Icon name="ios-arrow-forward" style={Styles.seta}></Icon>
       </TouchableOpacity>
     </View>
   );
