@@ -3,8 +3,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Provider as PaperProvider } from "react-native-paper";
 
-import Login from "./src/pages/Login/";
-import Survey from "./src/pages/Survey/";
+import Login from "./src/pages/Login/index";
+import Survey from "./src/pages/Survey/index";
 
 const Stack = createStackNavigator();
 

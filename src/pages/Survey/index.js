@@ -1,75 +1,116 @@
-import React, { Component } from "react";
-import { View, Text } from "react-native";
+import React from "react";
+import { View, Text, TextInput } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import Svg, { Ellipse } from "react-native-svg";
 import { RadioButton } from "react-native-paper";
 import Icon from "react-native-vector-icons/Ionicons";
 import Styles from "./Styles";
 
 function Survey(props) {
-  const [checked, setChecked] = React.useState("first");
-  const theme = {
-    colors: {
-      primary: "#6200ee",
-      accent: "yellow",
-    },
-  };
+  const [importancia, setImportancia] = React.useState("");
+  const [satisfacao, setSatisfacao] = React.useState("");
 
   return (
     <View style={Styles.container}>
       <View style={Styles.ps_bar}>
-        <Text style={Styles.title}>PS</Text>
+        <Text style={Styles.titleBar}>PS</Text>
       </View>
 
       <View style={Styles.survey}>
         <Text style={Styles.question}>
           1. Limpeza e conservação da sala de aula e da oficina
         </Text>
-        <Text style={Styles.nivelDeImportancia}>Nivel de Importancia:</Text>
-        {/* - First Radio - */}
-        <RadioButton
-          value="first"
-          status={checked === "first" ? "checked" : "unchecked"}
-          onPress={() => setChecked("first")}
-        />
-        <Text style={Styles.alta}>Alta</Text>
+        <Text style={Styles.questionLabel}>Nivel de Importancia:</Text>
+        <RadioButton.Group
+          onValueChange={(newValue) => setImportancia(newValue)}
+          value={importancia}
+        >
+          {/* - Alta Radio - */}
+          <RadioButton.Item
+            value="alta"
+            label="Alta"
+            color="#C22A1F"
+            labelStyle={Styles.text}
+          />
 
-        {/* - Second Radio - */}
-        <RadioButton
-          value="second"
-          status={checked === "second" ? "checked" : "unchecked"}
-          onPress={() => setChecked("second")}
-        />
-        <Text style={Styles.media}>Média</Text>
+          {/* - Media Radio - */}
+          <RadioButton.Item
+            value="media"
+            label="Média"
+            color="#C22A1F"
+            labelStyle={Styles.text}
+          />
 
-        {/* - Third Radio - */}
-        <RadioButton
-          value="third"
-          theme={theme.colors.primary}
-          status={checked === "third" ? "checked" : "unchecked"}
-          onPress={() => setChecked("third")}
-        />
-        <Text style={Styles.baixa}>Baixa</Text>
+          {/* - Baixa Radio - */}
+          <RadioButton.Item
+            value="baixa"
+            label="Baixa"
+            color="#C22A1F"
+            labelStyle={Styles.text}
+          />
+        </RadioButton.Group>
 
-        <Text style={Styles.nivelDeSatisfacao}>Nivel de Satisfação:</Text>
-        <Text style={Styles.otimo}>Otimo</Text>
-        <Text style={Styles.bom}>Bom</Text>
-        <Text style={Styles.naoSeAplica}>Não se aplica</Text>
-        <Text style={Styles.regular}>Regular</Text>
-        <Text style={Styles.ruim}>Ruim</Text>
+        <RadioButton.Group
+          onValueChange={(newValue) => setSatisfacao(newValue)}
+          value={satisfacao}
+        >
+          <Text style={Styles.questionLabel}>Nivel de Satisfação:</Text>
+          {/* - Ótimo Radio - */}
+          <RadioButton.Item
+            value="otimo"
+            label="Ótimo"
+            color="#C22A1F"
+            labelStyle={Styles.text}
+          />
+          {/* - Bom Radio - */}
+          <RadioButton.Item
+            value="bom"
+            label="Bom"
+            color="#C22A1F"
+            labelStyle={Styles.text}
+          />
+          {/* - Regular Radio - */}
+          <RadioButton.Item
+            value="regular"
+            label="Regular"
+            color="#C22A1F"
+            labelStyle={Styles.text}
+          />
+          {/* - Ruim Radio - */}
+          <RadioButton.Item
+            value="ruim"
+            label="Ruim"
+            color="#C22A1F"
+            labelStyle={Styles.text}
+          />
+          {/* - Não se aplica Radio - */}
+          <RadioButton.Item
+            value="nao-se-aplica"
+            label="Não se aplica"
+            color="#C22A1F"
+            labelStyle={Styles.text}
+          />
+        </RadioButton.Group>
+
+        {satisfacao === 'regular' || satisfacao === 'ruim'
+                ?
+                <View>
+                    <Text style={Styles.questionLabel}>
+                        Envie seu feedback para melhorarmos a qualidade deste serviço:
+                    </Text>
+                    <TextInput
+                        style={Styles.input}
+                        placeholder="Digite aqui"
+                        multiline={true}
+                        numberOfLines={4}
+                    />
+                </View>
+                :
+                null
+            }
+
       </View>
 
-      <TouchableOpacity style={Styles.avancar}>
-        <Svg viewBox="0 0 78.44 74.26">
-          <Ellipse
-            stroke="rgba(230, 230, 230,1)"
-            fill="rgba(212,48,48,1)"
-            cx={37}
-            cy={37}
-            rx={37}
-            ry={37}
-          ></Ellipse>
-        </Svg>
+      <TouchableOpacity style={Styles.avancar_btn}>
         <Icon name="ios-arrow-forward" style={Styles.seta}></Icon>
       </TouchableOpacity>
     </View>

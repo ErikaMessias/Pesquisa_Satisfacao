@@ -7,13 +7,11 @@ import {
   Platform,
 } from "react-native";
 import { TouchableOpacity } from "react-native";
-import { RadioButton } from "react-native-paper";
 import firebase from "../../config/firebaseconfig";
 import styles from "./styles";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function Login({ navigation }) {
-  const [checked, setChecked] = React.useState("first");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorLogin, setErrorLogin] = useState("");
@@ -106,17 +104,6 @@ export default function Login({ navigation }) {
         </TouchableOpacity>
       )}
       <View style={{ height: 100 }} />
-      
-      {/* <RadioButton
-        value="first"
-        status={checked === "first" ? "checked" : "unchecked"}
-        onPress={() => setChecked("first")}
-      />
-      <RadioButton
-        value="second"
-        status={checked === "second" ? "checked" : "unchecked"}
-        onPress={() => setChecked("second")}
-      /> */}
     </KeyboardAvoidingView>
   );
 }
