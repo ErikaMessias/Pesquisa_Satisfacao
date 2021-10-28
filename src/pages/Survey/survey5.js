@@ -110,10 +110,7 @@ function Survey({ navigation }) {
 
       </View>
 
-      <TouchableOpacity
-       style={Styles.avancar_btn}
-       onPress={() => navigation.navigate("Survey6")}
-      >
+      <TouchableOpacity style={Styles.avancar_btn} onPress={() => navigation.navigate("Survey6")}>
         <Icon name="ios-arrow-forward" style={Styles.seta}></Icon>
       </TouchableOpacity>
     </View>
