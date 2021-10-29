@@ -17,7 +17,8 @@ function Survey({ navigation }) {
 
       <View style={Styles.survey}>
         <Text style={Styles.question}>
-          2. Disponibilidade de equipamentos, maquinas e ferramentas para a realização do curso
+          2. Disponibilidade de equipamentos, maquinas e ferramentas para a
+          realização do curso
         </Text>
         <Text style={Styles.questionLabel}>Nivel de Importancia:</Text>
         <RadioButton.Group
@@ -91,31 +92,39 @@ function Survey({ navigation }) {
           />
         </RadioButton.Group>
 
-        {satisfacao === 'regular' || satisfacao === 'ruim'
-                ?
-                <View>
-                    <Text style={Styles.questionLabel}>
-                        Envie seu feedback para melhorarmos a qualidade deste serviço:
-                    </Text>
-                    <TextInput
-                        style={Styles.input}
-                        placeholder="Digite aqui"
-                        multiline={true}
-                        numberOfLines={4}
-                    />
-                </View>
-                :
-                null
-            }
-
+        {satisfacao === "regular" || satisfacao === "ruim" ? (
+          <View>
+            <Text style={Styles.questionLabel}>
+              Envie seu feedback para melhorarmos a qualidade deste serviço:
+            </Text>
+            <TextInput
+              style={Styles.input}
+              placeholder="Digite aqui"
+              multiline={true}
+              numberOfLines={4}
+            />
+          </View>
+        ) : null}
       </View>
 
-      <TouchableOpacity
-       style={Styles.avancar_btn}
-       onPress={() => navigation.navigate("Survey3")}
-      >
-        <Icon name="ios-arrow-forward" style={Styles.seta}></Icon>
-      </TouchableOpacity>
+      <View style={Styles.buttons}>
+        <TouchableOpacity style={Styles.voltar_btn} onPress={() => navigation.goBack()}>
+          <Icon name="ios-arrow-back" style={Styles.seta}></Icon>
+        </TouchableOpacity>
+
+        {(satisfacao === "" || importancia === "") || (satisfacao === "regular" || satisfacao === "ruim") ? (
+          <TouchableOpacity style={Styles.avancar_btn_disabled}>
+            <Icon name="ios-arrow-forward" style={Styles.seta}></Icon>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            style={Styles.avancar_btn}
+            onPress={() => navigation.navigate("Survey3")}
+          >
+            <Icon name="ios-arrow-forward" style={Styles.seta}></Icon>
+          </TouchableOpacity>
+        )}
+      </View>
     </View>
   );
 }

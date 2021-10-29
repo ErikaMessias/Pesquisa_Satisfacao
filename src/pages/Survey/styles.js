@@ -36,6 +36,23 @@ const styles = StyleSheet.create({
     marginTop: 20,
     fontWeight: "700",
   },
+  input: {
+    borderWidth: 1,
+    borderColor: "#C22A1F",
+    borderRadius: 5,
+    padding: 10,
+    margin: 15,
+  },
+// ======== ======== ======== ======== ======== ======== ======== ========
+  buttons:{
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+    paddingRight: 40,
+    paddingLeft: 40,
+    paddingBottom: 40,
+  },
   seta: {
     top: 15,
     left: 15,
@@ -48,16 +65,24 @@ const styles = StyleSheet.create({
     height: 75,
     backgroundColor: "#C22A1F",
     borderRadius: 20,
-    position: "absolute",
-    right: 30,
-    bottom: -100,
+    position: "relative",
+    alignSelf: "flex-end",
   },
-  input: {
-    borderWidth: 1,
-    borderColor: "#C22A1F",
-    borderRadius: 5,
-    padding: 10,
-    margin: 15,
+  voltar_btn: {
+    width: 75,
+    height: 75,
+    backgroundColor: "#C22A1F",
+    borderRadius: 20,
+    position: "relative",
+    alignSelf: "flex-start",
+  },
+  avancar_btn_disabled: {
+    width: 75,
+    height: 75,
+    backgroundColor: "#eb8b84",
+    borderRadius: 20,
+    position: "relative",
+    alignSelf: "flex-end",
   },
 });
 

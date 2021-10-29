@@ -91,31 +91,32 @@ function Survey({ navigation }) {
           />
         </RadioButton.Group>
 
-        {satisfacao === 'regular' || satisfacao === 'ruim'
-                ?
-                <View>
-                    <Text style={Styles.questionLabel}>
-                        Envie seu feedback para melhorarmos a qualidade deste serviço:
-                    </Text>
-                    <TextInput
-                        style={Styles.input}
-                        placeholder="Digite aqui"
-                        multiline={true}
-                        numberOfLines={4}
-                    />
-                </View>
-                :
-                null
-            }
-
+        {satisfacao === "regular" || satisfacao === "ruim" ? (
+          <View>
+            <Text style={Styles.questionLabel}>
+              Envie seu feedback para melhorarmos a qualidade deste serviço:
+            </Text>
+            <TextInput
+              style={Styles.input}
+              placeholder="Digite aqui"
+              multiline={true}
+              numberOfLines={4}
+            />
+          </View>
+        ) : null}
       </View>
-
-      <TouchableOpacity 
-        style={Styles.avancar_btn} 
-        onPress={() => navigation.navigate("Survey2")}
-      >
-        <Icon name="ios-arrow-forward" style={Styles.seta}></Icon>
-      </TouchableOpacity>
+      {satisfacao === "" || importancia === "" ? (
+        <TouchableOpacity style={Styles.avancar_btn_disabled}>
+          <Icon name="ios-arrow-forward" style={Styles.seta}></Icon>
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity
+          style={Styles.avancar_btn}
+          onPress={() => navigation.navigate("Survey2")}
+        >
+          <Icon name="ios-arrow-forward" style={Styles.seta}></Icon>
+        </TouchableOpacity>
+      )}
     </View>
   );
 }
