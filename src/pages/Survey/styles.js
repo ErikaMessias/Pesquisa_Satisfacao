@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    overflow: "visible",
   },
   ps_bar: {
     width: "100%",
@@ -24,11 +25,11 @@ const styles = StyleSheet.create({
   },
   question: {
     color: "#121212",
-    height: 40,
+    height: "auto",
     width: "100%",
     fontSize: 20,
     fontWeight: "700",
-    marginBottom: 30,
+    marginBottom: 10,
   },
   questionLabel: {
     color: "#121212",
@@ -52,6 +53,12 @@ const styles = StyleSheet.create({
     paddingRight: 40,
     paddingLeft: 40,
     paddingBottom: 40,
+  },
+  btn:{
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: 'flex-end',
+    paddingRight: 40,
   },
   seta: {
     top: 15,
@@ -83,6 +90,33 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     position: "relative",
     alignSelf: "flex-end",
+  },
+  btnFinish:{
+    width: "90%",
+    height: 40,
+    backgroundColor: "#C22A1F",
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    borderRadius: 5,
+    marginBottom: 20,
+  },
+  btnFinish_disabled:{
+    width: "90%",
+    height: 40,
+    backgroundColor: "#eb8b84",
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    borderRadius: 5,
+    marginBottom: 20,
+  },
+  textBtn:{
+    color: "#fff",
+    fontSize: 20,
+    padding: 10,
   },
 });
 

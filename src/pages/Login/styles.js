@@ -1,5 +1,4 @@
 import { Platform, StyleSheet } from "react-native";
-import { ceil } from "react-native-reanimated";
 
 const styles = StyleSheet.create({
   buttonLogin: {
@@ -43,7 +42,7 @@ const styles = StyleSheet.create({
     height: 78,
   },
   input: {
-    color: "121212",
+    color: "#121212",
     height: 33,
     width: 268,
     marginTop: 8,

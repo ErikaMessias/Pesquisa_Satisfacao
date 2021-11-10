@@ -1,4 +1,5 @@
 import React from "react";
+import { KeyboardAvoidingView } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Provider as PaperProvider } from "react-native-paper";
@@ -25,6 +26,7 @@ export default function App() {
     <PaperProvider>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Login">
+          {/* 
           <Stack.Screen
             name="Login"
             component={Login}
@@ -32,12 +34,12 @@ export default function App() {
               headerShown: false,
             }}
           />
-
+        */}
           <Stack.Screen
             name="Survey1"
             component={Survey1}
             options={{
-              headerTintColor: "#F00",
+              headerShown: false,
             }}
           />
 
@@ -45,7 +47,7 @@ export default function App() {
             name="Survey2"
             component={Survey2}
             options={{
-              headerTintColor: "#F00",
+              headerShown: false,
             }}
           />
 
@@ -53,7 +55,7 @@ export default function App() {
             name="Survey3"
             component={Survey3}
             options={{
-              headerTintColor: "#F00",
+              headerShown: false,
             }}
           />
 
@@ -61,7 +63,7 @@ export default function App() {
             name="Survey4"
             component={Survey4}
             options={{
-              headerTintColor: "#F00",
+              headerShown: false,
             }}
           />
 
@@ -69,7 +71,7 @@ export default function App() {
             name="Survey5"
             component={Survey5}
             options={{
-              headerTintColor: "#F00",
+              headerShown: false,
             }}
           />
 
@@ -77,7 +79,7 @@ export default function App() {
             name="Survey6"
             component={Survey6}
             options={{
-              headerTintColor: "#F00",
+              headerShown: false,
             }}
           />
 
@@ -85,7 +87,7 @@ export default function App() {
             name="Survey7"
             component={Survey7}
             options={{
-              headerTintColor: "#F00",
+              headerShown: false,
             }}
           />
 
@@ -93,7 +95,7 @@ export default function App() {
             name="Survey8"
             component={Survey8}
             options={{
-              headerTintColor: "#F00",
+              headerShown: false,
             }}
           />
 
@@ -101,7 +103,7 @@ export default function App() {
             name="Survey9"
             component={Survey9}
             options={{
-              headerTintColor: "#F00",
+              headerShown: false,
             }}
           />
 
@@ -109,7 +111,7 @@ export default function App() {
             name="Survey10"
             component={Survey10}
             options={{
-              headerTintColor: "#F00",
+              headerShown: false,
             }}
           />
 
@@ -117,7 +119,7 @@ export default function App() {
             name="Survey11"
             component={Survey11}
             options={{
-              headerTintColor: "#F00",
+              headerShown: false,
             }}
           />
 
@@ -125,7 +127,7 @@ export default function App() {
             name="Survey12"
             component={Survey12}
             options={{
-              headerTintColor: "#F00",
+              headerShown: false,
             }}
           />
 
@@ -133,7 +135,7 @@ export default function App() {
             name="Survey13"
             component={Survey13}
             options={{
-              headerTintColor: "#F00",
+              headerShown: false,
             }}
           />
         </Stack.Navigator>

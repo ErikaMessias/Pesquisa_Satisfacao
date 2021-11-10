@@ -2,12 +2,12 @@ import React from "react";
 import { View, Text, TextInput } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { RadioButton } from "react-native-paper";
-import Icon from "react-native-vector-icons/Ionicons";
-import Styles from "./Styles";
+import Styles from "./styles";
 
 function Survey({ navigation }) {
   const [importancia, setImportancia] = React.useState("");
   const [satisfacao, setSatisfacao] = React.useState("");
+  const [feedback, setFeedback] = React.useState("");
 
   return (
     <View style={Styles.container}>
@@ -16,9 +16,7 @@ function Survey({ navigation }) {
       </View>
 
       <View style={Styles.survey}>
-        <Text style={Styles.question}>
-          13. Atendimento da biblioteca
-        </Text>
+        <Text style={Styles.question}>13. Atendimento da biblioteca</Text>
         <Text style={Styles.questionLabel}>Nivel de Importancia:</Text>
         <RadioButton.Group
           onValueChange={(newValue) => setImportancia(newValue)}
@@ -91,28 +89,34 @@ function Survey({ navigation }) {
           />
         </RadioButton.Group>
 
-        {satisfacao === 'regular' || satisfacao === 'ruim'
-                ?
-                <View>
-                    <Text style={Styles.questionLabel}>
-                        Envie seu feedback para melhorarmos a qualidade deste serviço:
-                    </Text>
-                    <TextInput
-                        style={Styles.input}
-                        placeholder="Digite aqui"
-                        multiline={true}
-                        numberOfLines={4}
-                    />
-                </View>
-                :
-                null
-            }
-
+        {satisfacao === "regular" || satisfacao === "ruim" ? (
+          <View>
+            <Text style={Styles.questionLabel}>
+              Envie seu feedback para melhorarmos a qualidade deste serviço:
+            </Text>
+            <TextInput
+              style={Styles.input}
+              placeholder="Digite aqui"
+              multiline={true}
+              numberOfLines={4}
+              defaultValue={feedback}
+              onChangeText={(newValue) => setFeedback(newValue)}
+            />
+          </View>
+        ) : null}
       </View>
-
-      <TouchableOpacity style={Styles.buttonLogin}>
-        <Icon name="ios-arrow-forward" style={Styles.seta}></Icon>
-      </TouchableOpacity>
+      {satisfacao === "" ||
+      importancia === "" ||
+      ((satisfacao === "regular" || satisfacao === "ruim") &&
+        feedback === "") ? (
+        <TouchableOpacity style={Styles.btnFinish_disabled}>
+          <Text style={Styles.textBtn}>Finalizar</Text>
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity style={Styles.btnFinish}>
+          <Text style={Styles.textBtn}>Finalizar</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 }

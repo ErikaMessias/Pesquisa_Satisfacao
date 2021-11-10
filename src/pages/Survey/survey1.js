@@ -1,16 +1,17 @@
 import React from "react";
-import { View, Text, TextInput } from "react-native";
+import { View, Text, TextInput, KeyboardAvoidingView } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { RadioButton } from "react-native-paper";
 import Icon from "react-native-vector-icons/Ionicons";
-import Styles from "./Styles";
+import Styles from "./styles";
 
 function Survey({ navigation }) {
   const [importancia, setImportancia] = React.useState("");
   const [satisfacao, setSatisfacao] = React.useState("");
+  const [feedback, setFeedback] = React.useState("");
 
   return (
-    <View style={Styles.container}>
+    <KeyboardAvoidingView style={Styles.container}>
       <View style={Styles.ps_bar}>
         <Text style={Styles.titleBar}>PS</Text>
       </View>
@@ -101,23 +102,30 @@ function Survey({ navigation }) {
               placeholder="Digite aqui"
               multiline={true}
               numberOfLines={4}
+              defaultValue={feedback}
+              onChangeText={(newValue) => setFeedback(newValue)}
             />
           </View>
         ) : null}
       </View>
-      {satisfacao === "" || importancia === "" ? (
-        <TouchableOpacity style={Styles.avancar_btn_disabled}>
-          <Icon name="ios-arrow-forward" style={Styles.seta}></Icon>
-        </TouchableOpacity>
-      ) : (
-        <TouchableOpacity
-          style={Styles.avancar_btn}
-          onPress={() => navigation.navigate("Survey2")}
-        >
-          <Icon name="ios-arrow-forward" style={Styles.seta}></Icon>
-        </TouchableOpacity>
-      )}
-    </View>
+      <View style={Styles.btn}>
+        {satisfacao === "" ||
+        importancia === "" ||
+        ((satisfacao === "regular" || satisfacao === "ruim") &&
+          feedback === "") ? (
+          <TouchableOpacity style={Styles.avancar_btn_disabled}>
+            <Icon name="ios-arrow-forward" style={Styles.seta}></Icon>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            style={Styles.avancar_btn}
+            onPress={() => navigation.navigate("Survey2")}
+          >
+            <Icon name="ios-arrow-forward" style={Styles.seta}></Icon>
+          </TouchableOpacity>
+        )}
+      </View>
+    </KeyboardAvoidingView>
   );
 }
 
