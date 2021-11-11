@@ -18,6 +18,8 @@ import Survey10 from "./src/pages/Survey/survey10";
 import Survey11 from "./src/pages/Survey/survey11";
 import Survey12 from "./src/pages/Survey/survey12";
 import Survey13 from "./src/pages/Survey/survey13";
+import Send from "./src/pages/Survey/send";
+import Thanks from "./src/pages/Survey/thanks";
 
 const Stack = createStackNavigator();
 
@@ -34,7 +36,6 @@ export default function App() {
               headerShown: false,
             }}
           />
-        */}
           <Stack.Screen
             name="Survey1"
             component={Survey1}
@@ -131,6 +132,7 @@ export default function App() {
             }}
           />
 
+        */}
           <Stack.Screen
             name="Survey13"
             component={Survey13}
@@ -138,6 +140,23 @@ export default function App() {
               headerShown: false,
             }}
           />
+
+          <Stack.Screen
+            name="Send"
+            component={Send}
+            options={{
+              headerShown: false,
+            }}
+          />
+
+          <Stack.Screen
+            name="Thanks"
+            component={Thanks}
+            options={{
+              headerShown: false,
+            }}
+          />
+
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>

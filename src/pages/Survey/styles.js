@@ -118,6 +118,28 @@ const styles = StyleSheet.create({
     fontSize: 20,
     padding: 10,
   },
+  finish:{
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  finishLabel: {
+    fontSize: 30,
+    color: "#000",
+    textAlign: "center",
+    fontWeight: "700",
+  },
+  emoji: {
+    textAlign: "center",
+    fontSize: 80,
+    marginBottom: 30,
+  },
+  logo:{
+    width: 300,
+    height: 70,
+    marginTop: 200,
+  },
 });
 
 export default styles;

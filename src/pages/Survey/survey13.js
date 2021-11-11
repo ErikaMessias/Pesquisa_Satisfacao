@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TextInput } from "react-native";
+import { View, Text, TextInput, KeyboardAvoidingView, Platform, StatusBar } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { RadioButton } from "react-native-paper";
 import Styles from "./styles";
@@ -10,7 +10,9 @@ function Survey({ navigation }) {
   const [feedback, setFeedback] = React.useState("");
 
   return (
-    <View style={Styles.container}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"} style={Styles.container}>
+      <StatusBar backgroundColor="#fff"/>
       <View style={Styles.ps_bar}>
         <Text style={Styles.titleBar}>PS</Text>
       </View>
@@ -106,18 +108,18 @@ function Survey({ navigation }) {
         ) : null}
       </View>
       {satisfacao === "" ||
-      importancia === "" ||
-      ((satisfacao === "regular" || satisfacao === "ruim") &&
-        feedback === "") ? (
+        importancia === "" ||
+        ((satisfacao === "regular" || satisfacao === "ruim") &&
+          feedback === "") ? (
         <TouchableOpacity style={Styles.btnFinish_disabled}>
           <Text style={Styles.textBtn}>Finalizar</Text>
         </TouchableOpacity>
       ) : (
-        <TouchableOpacity style={Styles.btnFinish}>
+        <TouchableOpacity style={Styles.btnFinish} onPress={() => navigation.navigate("Send")}>
           <Text style={Styles.textBtn}>Finalizar</Text>
         </TouchableOpacity>
       )}
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 

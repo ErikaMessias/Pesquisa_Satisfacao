@@ -89,9 +89,9 @@ export default function Login({ navigation }) {
 
       {email === "" || password === "" ? (
         <TouchableOpacity
-          // disabled={true}
+          disabled={true}
           style={styles.buttonLogin}
-          //onPress={() => navigation.navigate("Survey")}
+          onPress={() => navigation.navigate("Survey")}
         >
           <Text style={styles.textButtomLogin}>Acessar</Text>
         </TouchableOpacity>
