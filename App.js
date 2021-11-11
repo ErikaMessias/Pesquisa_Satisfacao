@@ -28,7 +28,8 @@ export default function App() {
     <PaperProvider>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Login">
-          {/* 
+          {/*
+           */}
           <Stack.Screen
             name="Login"
             component={Login}
@@ -68,7 +69,7 @@ export default function App() {
             }}
           />
 
-         <Stack.Screen
+          <Stack.Screen
             name="Survey5"
             component={Survey5}
             options={{
@@ -132,7 +133,6 @@ export default function App() {
             }}
           />
 
-        */}
           <Stack.Screen
             name="Survey13"
             component={Survey13}
@@ -156,7 +156,6 @@ export default function App() {
               headerShown: false,
             }}
           />
-
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
