@@ -8,36 +8,31 @@ import {
 } from "react-native";
 import { TouchableOpacity } from "react-native";
 import firebase from "../../config/firebaseconfig";
-import styles from "./styles";
+import styles from "./styles";  
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function Login({ navigation }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errorLogin, setErrorLogin] = useState("");
+  
 
-  const LoginFirebase = () => {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        let user = userCredential.user;
-        navigation.navigate("Survey", { idUser: user.uid });
-      })
-      .catch((error) => {
-        setErrorLogin(true);
-        let errorCode = error.code;
-        let errorMessage = error.message;
-      });
-  };
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error , setError] = useState('');
 
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged(function (user) {
-      if (user) {
-        navigation.navigate("Survey", { idUser: user.uid });
-      }
+  const signIn = async() => {
+    firebase.auth().signInWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      
+      var user = userCredential.user;
+    
+      navigation.navigate('Survey1')
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      alert(errorCode,errorMessage);
     });
-  }, []);
+  }
+
 
   return (
     <KeyboardAvoidingView
@@ -55,7 +50,7 @@ export default function Login({ navigation }) {
               style={styles.input}
               placeholder="Insira o seu email"
               type="text"
-              onChangeText={(text) => setEmail(text)}
+              onChangeText={setEmail}
               value={email}
             />
           </View>
@@ -68,41 +63,19 @@ export default function Login({ navigation }) {
               secureTextEntry={true}
               placeholder="Insira sua senha"
               type="text"
-              onChangeText={(text) => setPassword(text)}
+              onChangeText={setPassword}
               value={password}
             />
           </View>
         </View>
       </View>
-      {errorLogin === true ? (
-        <View style={styles.contentAlert}>
-          <MaterialCommunityIcons
-            name="alert-circle"
-            size={24}
-            color="#bdbdbd"
-          />
-          <Text style={styles.warningAlert}> Email ou senha inválidos</Text>
-        </View>
-      ) : (
-        <View />
-      )}
-
-      {email === "" || password === "" ? (
         <TouchableOpacity
-          disabled={true}
           style={styles.buttonLogin}
-          onPress={() => navigation.navigate("Survey")}
+          onPress={() => signIn()}
         >
           <Text style={styles.textButtomLogin}>Acessar</Text>
         </TouchableOpacity>
-      ) : (
-        <TouchableOpacity
-          style={styles.buttonLogin}
-          onPress={() => navigation.navigate("Survey1")}
-        >
-          <Text style={styles.textButtomLogin}>Acessar</Text>
-        </TouchableOpacity>
-      )}
+      
       <View style={{ height: 100 }} />
     </KeyboardAvoidingView>
   );
