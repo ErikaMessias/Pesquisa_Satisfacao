@@ -4,11 +4,14 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { RadioButton } from "react-native-paper";
 import Icon from "react-native-vector-icons/Ionicons";
 import Styles from "./styles";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-function Survey({ navigation }) {
+function Survey({ route, navigation }) {
   const [importancia, setImportancia] = React.useState("");
   const [satisfacao, setSatisfacao] = React.useState("");
   const [feedback, setFeedback] = React.useState("");
+
+  var { imp1, sats1, feed1 } = route.params;
 
   return (
     <View style={Styles.container}>
@@ -21,6 +24,7 @@ function Survey({ navigation }) {
           2. Disponibilidade de equipamentos, maquinas e ferramentas para a
           realização do curso
         </Text>
+        <Text>{JSON.stringify(imp1)} - {JSON.stringify(sats1)} - {JSON.stringify(feed1)}</Text>
         <Text style={Styles.questionLabel}>Nivel de Importancia:</Text>
         <RadioButton.Group
           onValueChange={(newValue) => setImportancia(newValue)}
@@ -128,7 +132,12 @@ function Survey({ navigation }) {
         ) : (
           <TouchableOpacity
             style={Styles.avancar_btn}
-            onPress={() => navigation.navigate("Survey3")}
+            onPress={() => navigation.navigate("Survey13", {
+              blaa: {importancia},
+              sats2: {satisfacao},
+              feed2: {feedback}
+              // se voltar pra tela e apagar o feedback, o feedback continua com o valor setado anteriormente
+            })}
           >
             <Icon name="ios-arrow-forward" style={Styles.seta}></Icon>
           </TouchableOpacity>

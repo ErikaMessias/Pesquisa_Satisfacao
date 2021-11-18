@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, TextInput, KeyboardAvoidingView } from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { RadioButton } from "react-native-paper";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -9,6 +10,21 @@ function Survey({ navigation }) {
   const [importancia, setImportancia] = React.useState("");
   const [satisfacao, setSatisfacao] = React.useState("");
   const [feedback, setFeedback] = React.useState("");
+
+  const data = async () => {
+    try {
+      await AsyncStorage.setItem(
+        'importancia',
+        {importancia}
+      );
+      await AsyncStorage.setItem(
+        'satisfacao',
+        {satisfacao}
+      );
+    } catch (error) {
+      alert('Valores não enviados')
+    }
+  };
 
   return (
     <KeyboardAvoidingView style={Styles.container}>
@@ -20,7 +36,7 @@ function Survey({ navigation }) {
         <Text style={Styles.question}>
           1. Limpeza e conservação da sala de aula e da oficina
         </Text>
-        <Text style={Styles.questionLabel}>Nivel de Importancia:</Text>
+        <Text style={Styles.questionLabel}>Nivel de Importancia: </Text>
         <RadioButton.Group
           onValueChange={(newValue) => setImportancia(newValue)}
           value={importancia}
@@ -119,7 +135,7 @@ function Survey({ navigation }) {
         ) : (
           <TouchableOpacity
             style={Styles.avancar_btn}
-            onPress={() => navigation.navigate("Survey2")}
+            onPress={() => (navigation.navigate("Survey13"), data())}
           >
             <Icon name="ios-arrow-forward" style={Styles.seta}></Icon>
           </TouchableOpacity>
