@@ -45,7 +45,7 @@ export default function App() {
             options={{
               headerShown: false,
             }}
-          />
+            />
 
           <Stack.Screen
             name="Survey2"
@@ -53,8 +53,9 @@ export default function App() {
             options={{
               headerShown: false,
             }}
-          />
+            />
           {/* 
+          */}
           <Stack.Screen
             name="Survey3"
             component={Survey3}
@@ -135,7 +136,6 @@ export default function App() {
             }}
           />
 
-        */}
           <Stack.Screen
             name="Survey13"
             component={Survey13}

@@ -5,7 +5,7 @@ import { StyleSheet} from "react-native";
 const stylesBarra = StyleSheet.create({
   container: {},
   rect: {
-    width: 512,
+    width: 1000,
     height: 330,
     backgroundColor: "rgba(212,48,48,1)",
     transform: [

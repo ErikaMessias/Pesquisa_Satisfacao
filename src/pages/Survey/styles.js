@@ -4,6 +4,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     overflow: "visible",
+    height: 1000,
   },
   ps_bar: {
     width: "100%",
@@ -56,9 +57,11 @@ const styles = StyleSheet.create({
   },
   btn:{
     flex: 1,
-    flexDirection: "row",
+    height: 100,
+    flexDirection: "column",
     justifyContent: 'flex-end',
     paddingRight: 40,
+    paddingBottom: 40,
   },
   seta: {
     top: 15,

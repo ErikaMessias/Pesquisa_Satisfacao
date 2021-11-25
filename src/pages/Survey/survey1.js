@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, TextInput, KeyboardAvoidingView } from "react-native";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+// import AsyncStorage from "@react-native-async-storage/async-storage";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { RadioButton } from "react-native-paper";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -11,19 +11,20 @@ function Survey({ navigation }) {
   const [satisfacao, setSatisfacao] = React.useState("");
   const [feedback, setFeedback] = React.useState("");
 
-  const data = async () => {
+  const data = async (importancia, satisfacao) => {
     try {
-      await AsyncStorage.setItem(
-        'importancia',
-        {importancia}
-      );
-      await AsyncStorage.setItem(
-        'satisfacao',
-        {satisfacao}
-      );
+      await AsyncStorage.setItem("importancia", JSON.stringify(importancia));
+      await AsyncStorage.setItem("satisfacao", JSON.stringify(satisfacao));
     } catch (error) {
-      alert('Valores não enviados')
+      console.log(error);
+      alert("Valores não enviados");
     }
+  };
+
+  const getDados = async () => {
+    const importancia = JSON.parse(await AsyncStorage.getItem("importancia"));
+    const satisfacao = JSON.parse(await AsyncStorage.getItem("satisfacao"));
+    console.log(importancia, satisfacao);
   };
 
   return (
@@ -135,7 +136,9 @@ function Survey({ navigation }) {
         ) : (
           <TouchableOpacity
             style={Styles.avancar_btn}
-            onPress={() => (navigation.navigate("Survey13"), data())}
+            onPress={() => (
+              data(), getDados(), navigation.navigate("Survey13")
+            )}
           >
             <Icon name="ios-arrow-forward" style={Styles.seta}></Icon>
           </TouchableOpacity>
