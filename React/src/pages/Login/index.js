@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -6,33 +6,39 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import firebase from "../../config/firebaseconfig";
-import styles from "./styles";  
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import styles from "./styles";
 
 export default function Login({ navigation }) {
-  
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  var [erroLogin, setErroLogin] = useState("");
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error , setError] = useState('');
+  const signIn = async () => {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        var user = userCredential.user;
 
-  const signIn = async() => {
-    firebase.auth().signInWithEmailAndPassword(email, password)
-    .then((userCredential) => {
-      
-      var user = userCredential.user;
-    
-      navigation.navigate('Survey1')
-    })
-    .catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      alert(errorCode,errorMessage);
-    });
-  }
+        navigation.navigate("Survey1");
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        setErroLogin("Usuário ou senha inválidos. Verifique suas credenciais.");
+      });
+  };
 
+  const data = async (mail) => {
+    try {
+      await AsyncStorage.setItem("mail", JSON.stringify(mail));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <KeyboardAvoidingView
@@ -42,7 +48,6 @@ export default function Login({ navigation }) {
       <View style={styles.rotapm}></View>
       <Text style={styles.logtxt}>Login</Text>
       <View style={styles.forinha}>
-          
         <View style={styles.foracpf}>
           <Text style={styles.text}>E-mail</Text>
           <View style={styles.bordinha}>
@@ -67,15 +72,16 @@ export default function Login({ navigation }) {
               value={password}
             />
           </View>
+          <Text style={{ color: "red" }}>{erroLogin}</Text>
         </View>
       </View>
-        <TouchableOpacity
-          style={styles.buttonLogin}
-          onPress={() => signIn()}
-        >
-          <Text style={styles.textButtomLogin}>Acessar</Text>
-        </TouchableOpacity>
-      
+      <TouchableOpacity
+        style={styles.buttonLogin}
+        onPress={() => (signIn(), data(email))}
+      >
+        <Text style={styles.textButtomLogin}>Acessar</Text>
+      </TouchableOpacity>
+
       <View style={{ height: 100 }} />
     </KeyboardAvoidingView>
   );

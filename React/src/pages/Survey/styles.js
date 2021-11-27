@@ -126,6 +126,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+    padding: 30,
   },
   finishLabel: {
     fontSize: 30,

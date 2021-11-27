@@ -2,8 +2,6 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Provider as PaperProvider } from "react-native-paper";
-import axios from "axios";
-
 
 import Login from "./src/pages/Login/index";
 import Survey1 from "./src/pages/Survey/survey1";
@@ -25,20 +23,17 @@ import Thanks from "./src/pages/Survey/thanks";
 const Stack = createStackNavigator();
 
 export default function App() {
-  
   return (
     <PaperProvider>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Login">
-          {/*
           <Stack.Screen
             name="Login"
             component={Login}
             options={{
               headerShown: false,
             }}
-          />
-            */}
+            />
           <Stack.Screen
             name="Survey1"
             component={Survey1}
@@ -46,6 +41,7 @@ export default function App() {
               headerShown: false,
             }}
             />
+            {/*
 
           <Stack.Screen
             name="Survey2"
@@ -53,16 +49,14 @@ export default function App() {
             options={{
               headerShown: false,
             }}
-            />
-          {/* 
-          */}
+          />
           <Stack.Screen
             name="Survey3"
             component={Survey3}
             options={{
               headerShown: false,
             }}
-          />
+            />
 
           <Stack.Screen
             name="Survey4"
@@ -70,7 +64,7 @@ export default function App() {
             options={{
               headerShown: false,
             }}
-          />
+            />
 
           <Stack.Screen
             name="Survey5"
@@ -78,7 +72,7 @@ export default function App() {
             options={{
               headerShown: false,
             }}
-          />
+            />
 
           <Stack.Screen
             name="Survey6"
@@ -86,7 +80,7 @@ export default function App() {
             options={{
               headerShown: false,
             }}
-          />
+            />
 
           <Stack.Screen
             name="Survey7"
@@ -94,7 +88,7 @@ export default function App() {
             options={{
               headerShown: false,
             }}
-          />
+            />
 
           <Stack.Screen
             name="Survey8"
@@ -102,7 +96,7 @@ export default function App() {
             options={{
               headerShown: false,
             }}
-          />
+            />
 
           <Stack.Screen
             name="Survey9"
@@ -110,7 +104,7 @@ export default function App() {
             options={{
               headerShown: false,
             }}
-          />
+            />
 
           <Stack.Screen
             name="Survey10"
@@ -118,7 +112,7 @@ export default function App() {
             options={{
               headerShown: false,
             }}
-          />
+            />
 
           <Stack.Screen
             name="Survey11"
@@ -126,7 +120,7 @@ export default function App() {
             options={{
               headerShown: false,
             }}
-          />
+            />
 
           <Stack.Screen
             name="Survey12"
@@ -134,8 +128,11 @@ export default function App() {
             options={{
               headerShown: false,
             }}
-          />
+            />
 
+          */}
+        {/* 
+        */}
           <Stack.Screen
             name="Survey13"
             component={Survey13}

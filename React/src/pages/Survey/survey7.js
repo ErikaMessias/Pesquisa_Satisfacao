@@ -1,7 +1,7 @@
 import React from "react";
-import { View, Text, TextInput, KeyboardAvoidingView } from "react-native";
-// import AsyncStorage from "@react-native-async-storage/async-storage";
+import { View, Text, TextInput } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import AsyncStorage from "@react-native-community/async-storage";
 import { RadioButton } from "react-native-paper";
 import Icon from "react-native-vector-icons/Ionicons";
 import Styles from "./styles";
@@ -11,33 +11,27 @@ function Survey({ navigation }) {
   const [satisfacao, setSatisfacao] = React.useState("");
   const [feedback, setFeedback] = React.useState("");
 
-  const data = async (importancia, satisfacao) => {
+  const data = async (imp, sat, fb) => {
     try {
-      await AsyncStorage.setItem("importancia", JSON.stringify(importancia));
-      await AsyncStorage.setItem("satisfacao", JSON.stringify(satisfacao));
+      await AsyncStorage.setItem("imp7", JSON.stringify(imp));
+      await AsyncStorage.setItem("sat7", JSON.stringify(sat));
+      await AsyncStorage.setItem("fb7", JSON.stringify(fb));
     } catch (error) {
       console.log(error);
-      alert("Valores não enviados");
     }
   };
 
-  const getDados = async () => {
-    const importancia = JSON.parse(await AsyncStorage.getItem("importancia"));
-    const satisfacao = JSON.parse(await AsyncStorage.getItem("satisfacao"));
-    console.log(importancia, satisfacao);
-  };
-
   return (
-    <KeyboardAvoidingView style={Styles.container}>
+    <View style={Styles.container}>
       <View style={Styles.ps_bar}>
         <Text style={Styles.titleBar}>PS</Text>
       </View>
 
       <View style={Styles.survey}>
         <Text style={Styles.question}>
-          1. Limpeza e conservação da sala de aula e da oficina
+          7. Dominio dp docente sobre os assuntos tratados
         </Text>
-        <Text style={Styles.questionLabel}>Nivel de Importancia: </Text>
+        <Text style={Styles.questionLabel}>Nivel de Importancia:</Text>
         <RadioButton.Group
           onValueChange={(newValue) => setImportancia(newValue)}
           value={importancia}
@@ -125,7 +119,15 @@ function Survey({ navigation }) {
           </View>
         ) : null}
       </View>
-      <View style={Styles.btn}>
+
+      <View style={Styles.buttons}>
+        <TouchableOpacity
+          style={Styles.voltar_btn}
+          onPress={() => navigation.goBack()}
+        >
+          <Icon name="ios-arrow-back" style={Styles.seta}></Icon>
+        </TouchableOpacity>
+
         {satisfacao === "" ||
         importancia === "" ||
         ((satisfacao === "regular" || satisfacao === "ruim") &&
@@ -136,15 +138,13 @@ function Survey({ navigation }) {
         ) : (
           <TouchableOpacity
             style={Styles.avancar_btn}
-            onPress={() => (
-              data(), getDados(), navigation.navigate("Survey13")
-            )}
+            onPress={() => (navigation.navigate("Survey8"), data(importancia, satisfacao, feedback))}
           >
             <Icon name="ios-arrow-forward" style={Styles.seta}></Icon>
           </TouchableOpacity>
         )}
       </View>
-    </KeyboardAvoidingView>
+    </View>
   );
 }
 

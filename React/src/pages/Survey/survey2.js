@@ -4,11 +4,23 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { RadioButton } from "react-native-paper";
 import Icon from "react-native-vector-icons/Ionicons";
 import Styles from "./styles";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Survey({ navigation }) {
   const [importancia, setImportancia] = React.useState("");
   const [satisfacao, setSatisfacao] = React.useState("");
   const [feedback, setFeedback] = React.useState("");
+
+  const data = async (imp, sat, fb) => {
+    try {
+      await AsyncStorage.setItem("imp2", JSON.stringify(imp));
+      await AsyncStorage.setItem("sat2", JSON.stringify(sat));
+      await AsyncStorage.setItem("fb2", JSON.stringify(fb));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
   return (
     <View style={Styles.container}>
@@ -18,7 +30,8 @@ function Survey({ navigation }) {
 
       <View style={Styles.survey}>
         <Text style={Styles.question}>
-          7. Dominio dp docente sobre os assuntos tratados
+          2. Disponibilidade de equipamentos, maquinas e ferramentas para a
+          realização do curso
         </Text>
         <Text style={Styles.questionLabel}>Nivel de Importancia:</Text>
         <RadioButton.Group
@@ -127,7 +140,7 @@ function Survey({ navigation }) {
         ) : (
           <TouchableOpacity
             style={Styles.avancar_btn}
-            onPress={() => navigation.navigate("Survey8")}
+            onPress={() => (navigation.navigate("Survey3"), data(importancia, satisfacao, feedback))}
           >
             <Icon name="ios-arrow-forward" style={Styles.seta}></Icon>
           </TouchableOpacity>

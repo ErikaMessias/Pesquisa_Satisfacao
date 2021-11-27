@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, TextInput } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import AsyncStorage from "@react-native-community/async-storage";
 import { RadioButton } from "react-native-paper";
 import Icon from "react-native-vector-icons/Ionicons";
 import Styles from "./styles";
@@ -9,6 +10,16 @@ function Survey({ navigation }) {
   const [importancia, setImportancia] = React.useState("");
   const [satisfacao, setSatisfacao] = React.useState("");
   const [feedback, setFeedback] = React.useState("");
+
+  const data = async (imp, sat, fb) => {
+    try {
+      await AsyncStorage.setItem("imp11", JSON.stringify(imp));
+      await AsyncStorage.setItem("sat11", JSON.stringify(sat));
+      await AsyncStorage.setItem("fb11", JSON.stringify(fb));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <View style={Styles.container}>
@@ -125,7 +136,7 @@ function Survey({ navigation }) {
         ) : (
           <TouchableOpacity
             style={Styles.avancar_btn}
-            onPress={() => navigation.navigate("Survey12")}
+            onPress={() => (navigation.navigate("Survey12"), data(importancia, satisfacao, feedback))}
           >
             <Icon name="ios-arrow-forward" style={Styles.seta}></Icon>
           </TouchableOpacity>

@@ -1,7 +1,9 @@
 import React from "react";
-import { View, Text, TextInput, KeyboardAvoidingView, Platform, StatusBar } from "react-native";
+import { View, Text, TextInput } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import AsyncStorage from "@react-native-community/async-storage";
 import { RadioButton } from "react-native-paper";
+import Icon from "react-native-vector-icons/Ionicons";
 import Styles from "./styles";
 
 function Survey({ navigation }) {
@@ -9,16 +11,26 @@ function Survey({ navigation }) {
   const [satisfacao, setSatisfacao] = React.useState("");
   const [feedback, setFeedback] = React.useState("");
 
+  const data = async (imp, sat, fb) => {
+    try {
+      await AsyncStorage.setItem("imp10", JSON.stringify(imp));
+      await AsyncStorage.setItem("sat10", JSON.stringify(sat));
+      await AsyncStorage.setItem("fb10", JSON.stringify(fb));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"} style={Styles.container}>
-      <StatusBar backgroundColor="#fff"/>
+    <View style={Styles.container}>
       <View style={Styles.ps_bar}>
         <Text style={Styles.titleBar}>PS</Text>
       </View>
 
       <View style={Styles.survey}>
-        <Text style={Styles.question}>13. Atendimento da biblioteca</Text>
+        <Text style={Styles.question}>
+          10. Atendimento da recepção / secretaria da escola
+        </Text>
         <Text style={Styles.questionLabel}>Nivel de Importancia:</Text>
         <RadioButton.Group
           onValueChange={(newValue) => setImportancia(newValue)}
@@ -107,19 +119,32 @@ function Survey({ navigation }) {
           </View>
         ) : null}
       </View>
-      {satisfacao === "" ||
+
+      <View style={Styles.buttons}>
+        <TouchableOpacity
+          style={Styles.voltar_btn}
+          onPress={() => navigation.goBack()}
+        >
+          <Icon name="ios-arrow-back" style={Styles.seta}></Icon>
+        </TouchableOpacity>
+
+        {satisfacao === "" ||
         importancia === "" ||
         ((satisfacao === "regular" || satisfacao === "ruim") &&
           feedback === "") ? (
-        <TouchableOpacity style={Styles.btnFinish_disabled}>
-          <Text style={Styles.textBtn}>Finalizar</Text>
-        </TouchableOpacity>
-      ) : (
-        <TouchableOpacity style={Styles.btnFinish} onPress={() => navigation.navigate("Send")}>
-          <Text style={Styles.textBtn}>Finalizar</Text>
-        </TouchableOpacity>
-      )}
-    </KeyboardAvoidingView>
+          <TouchableOpacity style={Styles.avancar_btn_disabled}>
+            <Icon name="ios-arrow-forward" style={Styles.seta}></Icon>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            style={Styles.avancar_btn}
+            onPress={() => (navigation.navigate("Survey11"), data(importancia, satisfacao, feedback))}
+          >
+            <Icon name="ios-arrow-forward" style={Styles.seta}></Icon>
+          </TouchableOpacity>
+        )}
+      </View>
+    </View>
   );
 }
 
