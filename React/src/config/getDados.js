@@ -1,15 +1,8 @@
+import firebase from "./firebaseconfig";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default async function getAndSend() {
-  const anon = JSON.parse(await AsyncStorage.getItem("anon"));
-  var user = "";
-
-  if (anon == "Não") {
-    user = JSON.parse(await AsyncStorage.getItem("mail"));
-  } else {
-    user = "Anonimo";
-  }
-  console.log(user);
+  let dados = {};
 
   const imp1 = JSON.parse(await AsyncStorage.getItem("imp1"));
   const sat1 = JSON.parse(await AsyncStorage.getItem("sat1"));
@@ -75,4 +68,26 @@ export default async function getAndSend() {
   const sat13 = JSON.parse(await AsyncStorage.getItem("sat13"));
   const fb13 = JSON.parse(await AsyncStorage.getItem("fb13"));
   console.log(imp13, sat13, fb13);
+
+  for (let i = 1; i <= 13; ++i) {
+    let text =
+      "importância: " +
+      JSON.parse(await AsyncStorage.getItem("imp" + i)) +
+      "; satisfação: " +
+      JSON.parse(await AsyncStorage.getItem("sat" + i)) +
+      "; feedback: " +
+      JSON.parse(await AsyncStorage.getItem("fb" + i));
+    dados[i] = text;
+  }
+
+  const anon = JSON.parse(await AsyncStorage.getItem("anon"));
+  if (anon == "Não") {
+    dados[14] = "Autor: " + JSON.parse(await AsyncStorage.getItem("mail"));
+  } else {
+    dados[14] = "Autor: Anônimo";
+  }
+  console.log(dados[14]);
+
+  firebase.database().ref("formularios").push(dados);
+  // zerar os asyncstorage depois
 }
