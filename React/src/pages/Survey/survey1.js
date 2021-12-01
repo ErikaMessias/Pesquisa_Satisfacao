@@ -15,7 +15,7 @@ function Survey({ navigation }) {
     try {
       await AsyncStorage.setItem("imp1", JSON.stringify(imp));
       await AsyncStorage.setItem("sat1", JSON.stringify(sat));
-      await AsyncStorage.setItem("fb2", JSON.stringify(fb));
+      await AsyncStorage.setItem("fb1", JSON.stringify(fb));
     } catch (error) {
       console.log(error);
     }
